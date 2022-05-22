@@ -1,12 +1,11 @@
 import { Character } from "./character.js";
 
 export class Squire extends Character {
-  constructor(name, family, age, knight, brownNose, image) {
+  constructor(name, family, age, image, metadata) {
     super(name, family, age);
-    this.knight = knight;
-    this.brownNose = brownNose;
     this.image = image;
+    this.metadata = metadata;
   }
-  message = "'m a loser";
+  message = "I'm a loser";
   emoji = "🛡";
 }
