@@ -1,10 +1,12 @@
 export class Character {
   constructor(
+    id,
     name = "Name",
     family = "Family",
     age = undefined,
-    communication
+    communication = "Hello, kingdom"
   ) {
+    this.id = id;
     this.name = name;
     this.family = family;
     this.age = age;
@@ -12,10 +14,6 @@ export class Character {
   }
 
   isAlive = true;
-
-  die() {
-    this.isAlive = false;
-  }
 
   speak() {
     console.log(this.communication); // the message comes with all the role data

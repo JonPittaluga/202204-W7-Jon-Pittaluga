@@ -1,7 +1,10 @@
+// Classes
 import { King } from "./classes/king.js";
 import { Fighter } from "./classes/fighter.js";
 import { Advisor } from "./classes/advisor.js";
 import { Squire } from "./classes/squire.js";
+
+// Data
 import { characters } from "./data/characters.js";
 
 export function createCharacters() {
@@ -12,59 +15,46 @@ export function createCharacters() {
 
     if (character.role === "king") {
       name = new King(
+        character.id,
         character.name,
         character.family,
         character.age,
         character.image,
-        {
-          metadata: [{ "Years of reign": character.yearsOfReign }],
-        }
+        [character.yearsOfReign],
+        (character.role = "king")
       );
-      // console.log(name);
       charactersReady.push(name);
     } else if (character.role === "fighter") {
       name = new Fighter(
+        character.id,
         character.name,
         character.family,
         character.age,
         character.image,
-        {
-          metadata: [
-            { Dexterity: character.dexterity },
-            { Weapon: character.weapon },
-          ],
-        }
+        [character.dexterity, character.weapon]
       );
-      // console.log(name);
       charactersReady.push(name);
     } else if (character.role === "advisor") {
       name = new Advisor(
+        character.id,
         character.name,
         character.family,
         character.age,
         character.image,
-        {
-          metadata: [{ counseled: character.counseled }],
-        }
+        [character.counseled]
       );
-      // console.log(name);
       charactersReady.push(name);
     } else if (character.role === "squire") {
       name = new Squire(
+        character.id,
         character.name,
         character.family,
         character.age,
         character.image,
-        {
-          metadata: [
-            { knight: character.knight },
-            { "brown-nose": character.brownNose },
-          ],
-        }
+        [character.knight, character.brownNose]
       );
-      // console.log(name);
       charactersReady.push(name);
     }
   });
-  return charactersReady; // TODO: Pensar qué estoy haciendo. Saco lo mismo que tengo, pero en nuevos objetos que instancio.
+  return charactersReady;
 }

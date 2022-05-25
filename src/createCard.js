@@ -5,7 +5,7 @@ import { Card } from "./classes/card.js";
 
 export function createCards() {
   const charactersReady = createCharacters();
-  console.log("charactersReady:", charactersReady);
+  // console.log("charactersReady:", charactersReady);
 
   const cards = [];
 
@@ -14,24 +14,13 @@ export function createCards() {
 
     let card = [];
 
-    card = new Card(
-      character.name,
-      character.family,
-      character.age,
-      character.image,
-      character.isAlive,
-      character.metadata
-    );
-
+    card = new Card(character);
     cards.push(card);
   });
+
   cards.forEach((card) => {
-    card.greet();
-    console.log(card.name);
-    console.log(card.family);
-    // console.log(card.message); // TODO: Esto viene del proto
-    // console.log(card.emoji); TODO: Esto viene del proto
-    console.log(card.image);
+    // console.log("card", card.character);
+    console.log("card.id", card.character.id);
   });
   return cards;
 }
