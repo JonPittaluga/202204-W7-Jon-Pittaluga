@@ -15,8 +15,6 @@ function main() {
   injectCardHTML();
   document.querySelector(".characters-list").innerHTML = cardBodyHTMLToInject;
 
-  // console.log(cards);
-
   const target = document.querySelectorAll(".card");
 
   target.forEach((item) =>
@@ -26,8 +24,8 @@ function main() {
   );
 
   const handlerButtonClick = (ev) => {
-    // every button stores an id='1-kill' or id='1-speak'
-    let targetCard = ev.target.getAttribute("id");
+    let targetCard = ev.target.getAttribute("id"); // There's an id='${id}-kill' or id='${id}-speak' on every buttonb
+    console.log(targetCard);
     let id = targetCard[0];
     targetCard = cards[id - 1];
 
@@ -36,6 +34,7 @@ function main() {
         targetCard.die();
     }
 
+    // TODO: Refactor this code and isolate some code
     if (ev.target.textContent === "speak") {
       document.querySelector(".comunications").innerHTML =
         targetCard.buildSpeakHTML();
