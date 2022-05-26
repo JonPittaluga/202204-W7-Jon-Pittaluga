@@ -9,6 +9,7 @@ body {
   align-items: center;
 }
 .character {
+  min-width: 210px;
   width: 20%;
   flex-basis: auto;
   flex-grow: 0;
