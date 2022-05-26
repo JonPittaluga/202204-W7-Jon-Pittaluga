@@ -95,7 +95,7 @@ export class Card {
     status.classList.add("fa-thumbs-down");
 
     const image = document.querySelectorAll(".card img")[this.character.id - 1];
-    console.log(image);
+
     image.style = "transform: rotate(180deg)";
   }
 
