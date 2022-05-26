@@ -1,10 +1,11 @@
 import { createCards } from "./helpers/createCards.js"; // Receives an array of characters and use the Card class and returns an array of objects.
-import { renderCards } from "./helpers/renderCards.js";
+import { renderCards } from "./helpers/renderCards.js"; // For HTML code injection at page load
 
 function main() {
   const cards = createCards();
 
-  document.querySelector(".characters-list").innerHTML = renderCards(cards);
+  let characterList = (document.querySelector(".characters-list").innerHTML =
+    renderCards(cards));
 
   const targetCards = document.querySelectorAll(".card");
 
@@ -15,17 +16,18 @@ function main() {
   );
 
   const handlerButtonClick = (ev) => {
-    let targetId = ev.target.getAttribute("id")[0]; // There's an id='${id}-kill' or id='${id}-speak' on every buttonb. The id is the first character in the string
-    let targetCard = cards[targetId - 1];
+    const targetId = ev.target.getAttribute("id")[0]; // There's an id='${id}-kill' or id='${id}-speak' on every buttonb. The id is the first character in the string
+    const targetCard = cards[targetId - 1];
 
-    let targetStatus = ev.innerHTML; // There's an id='${id}-kill' or id='${id}-speak' on every buttonb. The id is the first character in the string
     if (ev.target.textContent === "die") {
-      targetCard.die(); // changes the status
+      // changes the status and re-styles the component
+      targetCard.die();
     }
 
     if (ev.target.textContent === "speak") {
+      // builds an HTML code depending on which card has been clicked.
       document.querySelector(".comunications").innerHTML =
-        targetCard.buildSpeakHTML(); // buildSpeakHTML is a Card class method.
+        targetCard.buildSpeakHTML();
       document.querySelector(".comunications").classList.add("on");
 
       setTimeout(() => {

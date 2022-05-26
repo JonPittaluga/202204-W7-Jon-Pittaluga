@@ -88,10 +88,12 @@ export class Card {
 
   die() {
     this.character.isAlive = false;
+
     const status = document.getElementById(`${this.character.id}-status`)
       .children[0];
     status.classList.remove("fa-thumbs-up");
     status.classList.add("fa-thumbs-down");
+
     const image = document.querySelectorAll(".card img")[this.character.id - 1];
     console.log(image);
     image.style = "transform: rotate(180deg)";
