@@ -1,44 +1,33 @@
-import { createCards } from "./createCard.js";
+import { createCards } from "./helpers/createCards.js"; // Receives an array of characters and use the Card class and returns an array of objects.
+import { renderCards } from "./helpers/renderCards.js";
 
 function main() {
   const cards = createCards();
-  let cardBodyHTMLToInject = "";
-  // let speakHTMLToInject = ""; // TODO: Remove if not used
 
-  function injectCardHTML() {
-    cards.forEach((card) => {
-      let html = card.buildCardHTML();
-      cardBodyHTMLToInject += html;
-    });
-  }
+  document.querySelector(".characters-list").innerHTML = renderCards(cards);
 
-  injectCardHTML();
-  document.querySelector(".characters-list").innerHTML = cardBodyHTMLToInject;
+  const targetCards = document.querySelectorAll(".card");
 
-  const target = document.querySelectorAll(".card");
-
-  target.forEach((item) =>
+  targetCards.forEach((item) =>
     item.addEventListener("click", (ev) => {
       handlerButtonClick(ev);
     })
   );
 
   const handlerButtonClick = (ev) => {
-    let targetCard = ev.target.getAttribute("id"); // There's an id='${id}-kill' or id='${id}-speak' on every buttonb
-    console.log(targetCard);
-    let id = targetCard[0];
-    targetCard = cards[id - 1];
+    let targetId = ev.target.getAttribute("id")[0]; // There's an id='${id}-kill' or id='${id}-speak' on every buttonb. The id is the first character in the string
+    let targetCard = cards[targetId - 1];
 
+    let targetStatus = ev.innerHTML; // There's an id='${id}-kill' or id='${id}-speak' on every buttonb. The id is the first character in the string
     if (ev.target.textContent === "die") {
-      document.getElementById(`${targetCard.character.id}`).innerHTML =
-        targetCard.die();
+      targetCard.die(); // changes the status
     }
 
-    // TODO: Refactor this code and isolate some code
     if (ev.target.textContent === "speak") {
       document.querySelector(".comunications").innerHTML =
-        targetCard.buildSpeakHTML();
+        targetCard.buildSpeakHTML(); // buildSpeakHTML is a Card class method.
       document.querySelector(".comunications").classList.add("on");
+
       setTimeout(() => {
         document.querySelector(".comunications").classList.remove("on");
       }, 2500);

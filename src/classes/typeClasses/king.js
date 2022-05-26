@@ -9,12 +9,4 @@ export class King extends Character {
     this.image = image;
     this.metadata = metadata;
   }
-
-  testCalling() {
-    console.log("BRAVO");
-  }
-
-  speak() {
-    super.speak(message);
-  }
 }

@@ -15,8 +15,7 @@ export class Character {
 
   isAlive = true;
 
-  speak() {
-    console.log(this.communication); // the message comes with all the role data
-    return this.communication;
+  speak(message) {
+    return console.log(this.message); // the message comes with all the role data
   }
 }

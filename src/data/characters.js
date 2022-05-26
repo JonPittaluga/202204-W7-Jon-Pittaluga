@@ -1,4 +1,4 @@
-export const characters = [
+export const charactersData = [
   {
     id: 1,
     name: "Joffrey",
@@ -46,5 +46,15 @@ export const characters = [
     role: "squire",
     knight: "Jaimie Lannister", // squire property
     brownNose: 3, // squire property
+  },
+  {
+    id: 6,
+    name: "Arya",
+    family: "Stark",
+    image: "../../img/arya.jpeg",
+    age: 12,
+    role: "fighter",
+    dexterity: 10, // squire property
+    weapon: "needle", // squire property
   },
 ];

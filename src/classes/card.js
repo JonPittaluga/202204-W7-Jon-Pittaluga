@@ -1,9 +1,8 @@
-import { getStatus } from "../helpers/getStatus.js";
-
-import { King } from "./king.js";
-import { Fighter } from "./fighter.js";
-import { Squire } from "./squire.js";
-import { Advisor } from "./advisor.js";
+// Classes
+import { King } from "./typeClasses/king.js";
+import { Fighter } from "./typeClasses/fighter.js";
+import { Squire } from "./typeClasses/squire.js";
+import { Advisor } from "./typeClasses/advisor.js";
 
 export class Card {
   constructor(character) {
@@ -57,7 +56,7 @@ export class Card {
             <ul class="list-unstyled">
               <li>Age: ${this.character.age} years old</li>
               <li class="emoji">${this.character.emoji}</li>
-              <li>
+              <li id="${this.character.id}-status">
                 Status:
                 ${
                   this.character.isAlive === true
@@ -71,7 +70,7 @@ export class Card {
 
     const metadataHTML = this.getMetadataHTML();
 
-    let htmlPart2 = `
+    const htmlPart2 = `
             <div class="character__actions">
               <button class="character__action btn speak" id="${this.character.id}-speak">speak</button>
               <button class="character__action btn kill" id="${this.character.id}-kill">die</button>
@@ -87,15 +86,19 @@ export class Card {
     return html;
   }
 
-  // action methods as described in the exercise
   die() {
     this.character.isAlive = false;
-    return this.buildCardHTML();
+    const status = document.getElementById(`${this.character.id}-status`)
+      .children[0];
+    status.classList.remove("fa-thumbs-up");
+    status.classList.add("fa-thumbs-down");
+    const image = document.querySelectorAll(".card img")[this.character.id - 1];
+    console.log(image);
+    image.style = "transform: rotate(180deg)";
   }
 
   buildSpeakHTML() {
-    // console.log(this.character.message);
-    let html = `    
+    const html = `    
       <p class="comunications__text display-1">${this.character.message}</p>
       <img
         class="comunications__picture"
